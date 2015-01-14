@@ -89,39 +89,46 @@ void Connection::MainLoop()
             {
                 printf( "Error: Recieved excessively long message - it will be discarded" );
                 bDiscard = true;
+                iWorkCursor = 0;
+                continue;
             }
 
             // check for new lines ending our message
             if( szBuffer[ i ] == '\r' && szBuffer[ i + 1 ] == '\n' )
             {
-                // this is the end of a message
-                szWorkBuffer[ iWorkCursor ] = szBuffer[ i + 1 ];
-                szWorkBuffer[ iWorkCursor + 1 ] = 0;
-                printf( "RECIEVE: %s", szWorkBuffer );
-
-                // reply PING with PONG
-                if( !strncmp( szWorkBuffer, "PING", 4 ) )
+                if( !bDiscard )
                 {
-                    szBuffer[ 1 ] = 'O';
-                    Send( szBuffer );
-                }
-                else
-                {
-                    // check if we should join the channel.
-                    // 001 is the first response, so ask then...
-                    const char* szSpaceCursor = szWorkBuffer;
-                    while( *szSpaceCursor && ( *szSpaceCursor != ' ' ) )
-                    {
-                        ++szSpaceCursor;
-                    }
+                    bDiscard = false;
 
-                    if( !strncmp( szSpaceCursor + 1, "001", 3 ) )
+                    // this is the end of a message
+                    szWorkBuffer[ iWorkCursor ] = szBuffer[ i + 1 ];
+                    szWorkBuffer[ iWorkCursor + 1 ] = 0;
+                    printf( "RECIEVE: %s", szWorkBuffer );
+
+                    // reply PING with PONG
+                    if( !strncmp( szWorkBuffer, "PING", 4 ) )
                     {
-                        Send( "JOIN %s", gszChannel );
+                        szBuffer[ 1 ] = 'O';
+                        Send( szBuffer );
                     }
-                    else if( spfnMessageCallback )
+                    else
                     {
-                        spfnMessageCallback( szWorkBuffer, iWorkCursor );
+                        // check if we should join the channel.
+                        // 001 is the first response, so ask then...
+                        const char* szSpaceCursor = szWorkBuffer;
+                        while( *szSpaceCursor && ( *szSpaceCursor != ' ' ) )
+                        {
+                            ++szSpaceCursor;
+                        }
+
+                        if( !strncmp( szSpaceCursor + 1, "001", 3 ) )
+                        {
+                            Send( "JOIN %s", gszChannel );
+                        }
+                        else if( spfnMessageCallback )
+                        {
+                            spfnMessageCallback( szWorkBuffer, iWorkCursor );
+                        }
                     }
                 }
 
