@@ -9,5 +9,13 @@
     <ClCompile Include="..\Code\Core\EntryPoint_Console.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="..\Code\Core\Connection.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Code\Core\Connection.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
