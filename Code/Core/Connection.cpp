@@ -1,3 +1,5 @@
+// Copyright (c) 2015 Cranium Software
+
 #include "Connection.h"
 
 #include <cstdarg>

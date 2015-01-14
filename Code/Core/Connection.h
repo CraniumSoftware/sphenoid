@@ -1,3 +1,5 @@
+// Copyright (c) 2015 Cranium Software
+
 #ifndef CONNECTION_H
 #define CONNECTION_H
 
