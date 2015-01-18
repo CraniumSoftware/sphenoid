@@ -2,7 +2,7 @@
 
 #include "CommandParser.h"
 
-#include "Connection.h"
+#include "Client/Connection.h"
 
 #include <cstring>
 

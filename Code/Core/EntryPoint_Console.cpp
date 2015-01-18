@@ -1,7 +1,7 @@
 // Copyright (c) 2015 Cranium Software
 
-#include "CommandParser.h"
-#include "Connection.h"
+#include "Client/Connection.h"
+#include "Protocol/CommandParser.h"
 
 int main( const int /*iArgumentCount*/, const char* const* const /*pszArguments*/ )
 {

@@ -4,24 +4,30 @@
     <Filter Include="Core">
       <UniqueIdentifier>{fc600f63-5e5f-4920-8b69-6f7eafb80f55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Client">
+      <UniqueIdentifier>{239dcb69-fa55-48b0-8b63-a137079d9e92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Protocol">
+      <UniqueIdentifier>{5147e168-5196-4000-871e-b9a4e282cf6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Code\Core\EntryPoint_Console.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Core\Connection.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="..\Code\Client\Connection.cpp">
+      <Filter>Client</Filter>
     </ClCompile>
-    <ClCompile Include="..\Code\Core\CommandParser.cpp">
-      <Filter>Core</Filter>
+    <ClCompile Include="..\Code\Protocol\CommandParser.cpp">
+      <Filter>Protocol</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Code\Core\Connection.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="..\Code\Client\Connection.h">
+      <Filter>Client</Filter>
     </ClInclude>
-    <ClInclude Include="..\Code\Core\CommandParser.h">
-      <Filter>Core</Filter>
+    <ClInclude Include="..\Code\Protocol\CommandParser.h">
+      <Filter>Protocol</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
