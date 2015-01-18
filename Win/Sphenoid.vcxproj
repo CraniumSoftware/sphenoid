@@ -147,10 +147,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Code\Core\CommandParser.cpp" />
     <ClCompile Include="..\Code\Core\Connection.cpp" />
     <ClCompile Include="..\Code\Core\EntryPoint_Console.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Code\Core\CommandParser.h" />
     <ClInclude Include="..\Code\Core\Connection.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

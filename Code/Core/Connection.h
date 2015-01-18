@@ -14,6 +14,7 @@ public:
     static void MainLoop();
 
     // SE - TODO: some std::vector list of these? std::function?
+    // note that returning true from the callback will terminate the connection
     static void RegisterCallback( bool( *const pfnMessageCallback )( const char* const szWholeMessage, const int iLength ) )
     {
         spfnMessageCallback = pfnMessageCallback;

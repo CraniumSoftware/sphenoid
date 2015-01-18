@@ -43,6 +43,7 @@ int Connection::Initiate( const char* const szNick, const char* const szChannel,
         sllSocket = socket( pxAddress->ai_family, pxAddress->ai_socktype, pxAddress->ai_protocol );
         connect( sllSocket, pxAddress->ai_addr, static_cast< int >( pxAddress->ai_addrlen ) );
 
+        // SE - TODO: wait for these? it seems a bit unreliable atm.
         Send( "USER %s 0 0 :%s", szNick, szNick );
         Send( "NICK %s", szNick );
 
@@ -77,7 +78,8 @@ void Connection::MainLoop()
     int iLength = 0;
     int iWorkCursor = 0;
     bool bDiscard = false;
-    while( iLength != SOCKET_ERROR )
+    bool bDone = false;
+    while( !bDone && ( iLength != SOCKET_ERROR ) )
     {
         iLength = recv( sllSocket, szBuffer, 1024, 0 );
 
@@ -110,8 +112,8 @@ void Connection::MainLoop()
                     // reply PING with PONG
                     if( !strncmp( szWorkBuffer, "PING", 4 ) )
                     {
-                        szBuffer[ 1 ] = 'O';
-                        Send( szBuffer );
+                        szWorkBuffer[ 1 ] = 'O';
+                        Send( szWorkBuffer );
                     }
                     else
                     {
@@ -129,7 +131,7 @@ void Connection::MainLoop()
                         }
                         else if( spfnMessageCallback )
                         {
-                            spfnMessageCallback( szWorkBuffer, iWorkCursor );
+                            bDone = bDone || spfnMessageCallback( szWorkBuffer, iWorkCursor );
                         }
                     }
                 }
